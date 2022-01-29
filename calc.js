@@ -5,6 +5,7 @@ let display = '';
 let action = '';
 let lastValue = 0;
 let sideValue = 0;
+let hitEnter = false;
 
 
 
@@ -17,43 +18,43 @@ for (let i = 0; i< 10; i++){
 
 const addAssign = document.getElementById('buttonAdd');
 addAssign.addEventListener('click', function(){
-   
+   if (hitEnter == false) {
     calculate();
-    action = '+';
     display = '';
     document.getElementById('display').innerHTML = lastValue;
+   }
+   action = '+';
     
 })
 
 const subtractAssign = document.getElementById('buttonSubtract');
 subtractAssign.addEventListener('click', function(){
-  
-    calculate();
-    action = '-';
+    if (hitEnter == false){
+    calculate();   
     display = '';
     document.getElementById('display').innerHTML = lastValue;
-    
+    }
+    action = '-';
 })
 
 const multiplyAssign = document.getElementById('buttonMultiply');
 multiplyAssign.addEventListener('click', function(){
-    
-    calculate();
-    action = '*';
-    display = '';
-    document.getElementById('display').innerHTML = lastValue;
-    
-    
+    if (hitEnter == false){
+        calculate();   
+        display = '';
+        document.getElementById('display').innerHTML = lastValue;
+        }
+        action = '*';
 })
 
 const divideAssign = document.getElementById('buttonDivide');
 divideAssign.addEventListener('click', function(){
-
-    calculate();
-    action = '/';
-    display = '';
-    document.getElementById('display').innerHTML = lastValue;
-    
+    if (hitEnter == false){
+        calculate();   
+        display = '';
+        document.getElementById('display').innerHTML = lastValue;
+        }
+        action = '/';
 })
 
 const plusMinusAssign = document.getElementById('buttonPlusMinus');
@@ -76,8 +77,10 @@ periodAssign.addEventListener('click', function(){
 const equalsAssign = document.getElementById('buttonEquals');
 equalsAssign.addEventListener('click', function(){
     calculate();
-    //display = '';
+    sideValue = display;
+    display = '';
     document.getElementById('display').innerHTML = lastValue;
+    hitEnter = true;
 })
 
 const clearAssign = document.getElementById('buttonClear');
@@ -95,11 +98,17 @@ clearEverythingAssign.addEventListener('click', function(){
 })
 
 function valueInput(x){
+    if(hitEnter == true){
+        hitEnter = false;
+    }
     display = display + x;
     document.getElementById('display').innerHTML = display;
 }
 
 function calculate(){
+    if(hitEnter == true){
+        display = sideValue;
+    }
     if(action == ''){
         lastValue = display;
     }
