@@ -24,6 +24,7 @@ addAssign.addEventListener('click', function(){
     document.getElementById('display').innerHTML = lastValue;
    }
    action = '+';
+   hitEnter = false;
     
 })
 
@@ -35,6 +36,7 @@ subtractAssign.addEventListener('click', function(){
     document.getElementById('display').innerHTML = lastValue;
     }
     action = '-';
+    hitEnter = false;
 })
 
 const multiplyAssign = document.getElementById('buttonMultiply');
@@ -45,6 +47,7 @@ multiplyAssign.addEventListener('click', function(){
         document.getElementById('display').innerHTML = lastValue;
         }
         action = '*';
+        hitEnter = false;
 })
 
 const divideAssign = document.getElementById('buttonDivide');
@@ -55,6 +58,7 @@ divideAssign.addEventListener('click', function(){
         document.getElementById('display').innerHTML = lastValue;
         }
         action = '/';
+        hitEnter = false;
 })
 
 const plusMinusAssign = document.getElementById('buttonPlusMinus');
@@ -91,14 +95,21 @@ clearAssign.addEventListener('click', function(){
 
 const clearEverythingAssign = document.getElementById('buttonClearEverything');
 clearEverythingAssign.addEventListener('click', function(){
+    clearEverything();
+    document.getElementById('display').innerHTML = display;
+});
+
+function clearEverything()  
+{
     display = '';
     action = '';
     lastValue = 0;
     document.getElementById('display').innerHTML = display;
-})
+}
 
 function valueInput(x){
     if(hitEnter == true){
+        clearEverything();
         hitEnter = false;
     }
     display = display + x;
@@ -123,5 +134,13 @@ function calculate(){
     }
     else{
         lastValue = +lastValue / +display; 
+    }
+    if(lastValue == 'Infinity')
+    {
+        clearEverything();
+        lastValue = 'Undefined - Can not divide by 0.';
+        document.getElementById('display').innerHTML = lastValue;
+        
+
     }
 }
