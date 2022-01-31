@@ -21,9 +21,10 @@ addAssign.addEventListener('click', function(){
    if (hitEnter == false) {
     calculate();
     display = '';
-    document.getElementById('display').innerHTML = lastValue;
+    //document.getElementById('displayBottom').innerHTML = lastValue;
    }
    action = '+';
+   document.getElementById('displayTopRight').innerHTML = action;
    hitEnter = false;
     
 })
@@ -33,9 +34,10 @@ subtractAssign.addEventListener('click', function(){
     if (hitEnter == false){
     calculate();   
     display = '';
-    document.getElementById('display').innerHTML = lastValue;
+    //document.getElementById('displayBottom').innerHTML = lastValue;
     }
     action = '-';
+    document.getElementById('displayTopRight').innerHTML = action;
     hitEnter = false;
 })
 
@@ -44,9 +46,10 @@ multiplyAssign.addEventListener('click', function(){
     if (hitEnter == false){
         calculate();   
         display = '';
-        document.getElementById('display').innerHTML = lastValue;
+        //document.getElementById('displayBottom').innerHTML = lastValue;
         }
-        action = '*';
+        action = 'x';
+        document.getElementById('displayTopRight').innerHTML = action;
         hitEnter = false;
 })
 
@@ -55,9 +58,10 @@ divideAssign.addEventListener('click', function(){
     if (hitEnter == false){
         calculate();   
         display = '';
-        document.getElementById('display').innerHTML = lastValue;
+        //document.getElementById('displayBottom').innerHTML = lastValue;
         }
         action = '/';
+        document.getElementById('displayTopRight').innerHTML = action;
         hitEnter = false;
 })
 
@@ -69,13 +73,13 @@ plusMinusAssign.addEventListener('click', function(){
     else{
         display = '-' + display;
     }
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = display;
 })
 
 const periodAssign = document.getElementById('buttonPeriod');
 periodAssign.addEventListener('click', function(){
     display = display + '.';
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = display;
 })
 
 const equalsAssign = document.getElementById('buttonEquals');
@@ -83,20 +87,24 @@ equalsAssign.addEventListener('click', function(){
     calculate();
     sideValue = display;
     display = '';
-    document.getElementById('display').innerHTML = lastValue;
+    document.getElementById('displayBottom').innerHTML = lastValue;
+    document.getElementById('displayTopRight').innerHTML = '';
+    document.getElementById('displayTopLeft').innerHTML = '';
     hitEnter = true;
 })
 
 const clearAssign = document.getElementById('buttonClear');
 clearAssign.addEventListener('click', function(){
     display = '';
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = display;
 })
 
 const clearEverythingAssign = document.getElementById('buttonClearEverything');
 clearEverythingAssign.addEventListener('click', function(){
     clearEverything();
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = '';
+    document.getElementById('displayTopRight').innerHTML = '';
+    document.getElementById('displayTopLeft').innerHTML = '';
 });
 
 function clearEverything()  
@@ -104,7 +112,7 @@ function clearEverything()
     display = '';
     action = '';
     lastValue = 0;
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = display;
 }
 
 function valueInput(x){
@@ -113,7 +121,8 @@ function valueInput(x){
         hitEnter = false;
     }
     display = display + x;
-    document.getElementById('display').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = display;
+    
 }
 
 function calculate(){
@@ -129,7 +138,7 @@ function calculate(){
     else if(action == '-'){
         lastValue = +lastValue - +display; 
     }
-    else if(action == '*'){
+    else if(action == 'x'){
         lastValue = +lastValue * +display; 
     }
     else{
@@ -139,8 +148,9 @@ function calculate(){
     {
         clearEverything();
         lastValue = 'Undefined - Can not divide by 0.';
-        document.getElementById('display').innerHTML = lastValue;
+        document.getElementById('displayBottom').innerHTML = lastValue;
         
 
     }
+    document.getElementById('displayTopLeft').innerHTML = lastValue;
 }
