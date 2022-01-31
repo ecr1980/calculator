@@ -18,49 +18,21 @@ for (let i = 0; i< 10; i++){
 
 const addAssign = document.getElementById('buttonAdd');
 addAssign.addEventListener('click', function(){
-   /*if (hitEnter == false) {
-    calculate();
-    display = '';
-   }
-   action = '+';
-   document.getElementById('displayTopRight').innerHTML = action;
-   hitEnter = false;*/
    operationChoice('+')
 })
 
 const subtractAssign = document.getElementById('buttonSubtract');
 subtractAssign.addEventListener('click', function(){
-    /*if (hitEnter == false){
-    calculate();   
-    display = '';
-    }
-    action = '-';
-    document.getElementById('displayTopRight').innerHTML = action;
-    hitEnter = false;*/
     operationChoice('-')
 })
 
 const multiplyAssign = document.getElementById('buttonMultiply');
 multiplyAssign.addEventListener('click', function(){
-    /*if (hitEnter == false){
-        calculate();   
-        display = '';
-        }
-        action = 'x';
-        document.getElementById('displayTopRight').innerHTML = action;
-        hitEnter = false;*/
         operationChoice('x')
 })
 
 const divideAssign = document.getElementById('buttonDivide');
 divideAssign.addEventListener('click', function(){
-    /*if (hitEnter == false){
-        calculate();   
-        display = '';
-        }
-        action = '/';
-        document.getElementById('displayTopRight').innerHTML = action;
-        hitEnter = false;*/
         operationChoice('/')
 })
 
@@ -157,11 +129,17 @@ function calculate(){
     }
     if(lastValue == 'Infinity')
     {
-        clearEverything();
-        lastValue = 'Undefined - Can not divide by 0.';
-        document.getElementById('displayBottom').innerHTML = lastValue;
-        
-
+        oopsy('Undefined - Can not divide by 0.');
+    }
+    else if(lastValue == 'NaN')
+    {
+        oopsy('Not a number.');
     }
     document.getElementById('displayTopLeft').innerHTML = lastValue;
+}
+
+function oopsy(x)
+{
+    clearEverything();
+    lastValue = x;
 }
