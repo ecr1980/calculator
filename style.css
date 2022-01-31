@@ -1,24 +1,12 @@
 #calcBody{
     display:flex;
-    height:800px;
+    height:650px;
     width:500px;
     background-color:darkgray;
     flex-direction:column;
+    border-radius:20px;
 }
 
-#calcTop{
-    display:flex;
-    height:100px;
-    width:500px;
-    align-items: center;
-    justify-content: center;
-}
-
-#solar{
-    height:50px;
-    width:300px;
-    background-color:brown;
-}
 
 #calcBodyDisplay{
     display:flex;
