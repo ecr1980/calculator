@@ -18,51 +18,50 @@ for (let i = 0; i< 10; i++){
 
 const addAssign = document.getElementById('buttonAdd');
 addAssign.addEventListener('click', function(){
-   if (hitEnter == false) {
+   /*if (hitEnter == false) {
     calculate();
     display = '';
-    //document.getElementById('displayBottom').innerHTML = lastValue;
    }
    action = '+';
    document.getElementById('displayTopRight').innerHTML = action;
-   hitEnter = false;
-    
+   hitEnter = false;*/
+   operationChoice('+')
 })
 
 const subtractAssign = document.getElementById('buttonSubtract');
 subtractAssign.addEventListener('click', function(){
-    if (hitEnter == false){
+    /*if (hitEnter == false){
     calculate();   
     display = '';
-    //document.getElementById('displayBottom').innerHTML = lastValue;
     }
     action = '-';
     document.getElementById('displayTopRight').innerHTML = action;
-    hitEnter = false;
+    hitEnter = false;*/
+    operationChoice('-')
 })
 
 const multiplyAssign = document.getElementById('buttonMultiply');
 multiplyAssign.addEventListener('click', function(){
-    if (hitEnter == false){
+    /*if (hitEnter == false){
         calculate();   
         display = '';
-        //document.getElementById('displayBottom').innerHTML = lastValue;
         }
         action = 'x';
         document.getElementById('displayTopRight').innerHTML = action;
-        hitEnter = false;
+        hitEnter = false;*/
+        operationChoice('x')
 })
 
 const divideAssign = document.getElementById('buttonDivide');
 divideAssign.addEventListener('click', function(){
-    if (hitEnter == false){
+    /*if (hitEnter == false){
         calculate();   
         display = '';
-        //document.getElementById('displayBottom').innerHTML = lastValue;
         }
         action = '/';
         document.getElementById('displayTopRight').innerHTML = action;
-        hitEnter = false;
+        hitEnter = false;*/
+        operationChoice('/')
 })
 
 const plusMinusAssign = document.getElementById('buttonPlusMinus');
@@ -123,6 +122,18 @@ function valueInput(x){
     display = display + x;
     document.getElementById('displayBottom').innerHTML = display;
     
+}
+
+function operationChoice(x){
+    {
+        if (hitEnter == false){
+            calculate();   
+            display = '';
+            }
+            action = x;
+            document.getElementById('displayTopRight').innerHTML = action;
+            hitEnter = false;
+    }
 }
 
 function calculate(){
