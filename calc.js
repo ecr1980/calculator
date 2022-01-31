@@ -109,37 +109,36 @@ function operationChoice(x){
 }
 
 function calculate(){
-    if(hitEnter == true){
-        display = sideValue;
+    if(display === '0'){
+        oopsy('Divide by 0?');
     }
-    if(action == ''){
-        lastValue = display;
-    }
-    else if(action == '+'){
-        lastValue = +lastValue + +display; 
-    }
-    else if(action == '-'){
-        lastValue = +lastValue - +display; 
-    }
-    else if(action == 'x'){
-        lastValue = +lastValue * +display; 
-    }
-    else{
-        if(display === '0'){
-            oopsy('Divide by 0?');
-        }
-        else{
-        lastValue = +lastValue / +display; 
-        }
-    }
-    
-     if(isNaN(lastValue) || lastValue == 'Infinity')
+    else if(isNaN(lastValue) || isNaN(display) || document.getElementById('displayTopLeft').innerHTML == 'Infinity')
     {
         oopsy('Not a number.');
     }
     else{
-    document.getElementById('displayTopLeft').innerHTML = lastValue;
+        if(hitEnter == true){
+        display = sideValue;
+        }
+        if(action == ''){
+        lastValue = display;
+        }
+        else if(action == '+'){
+        lastValue = +lastValue + +display; 
+        }
+        else if(action == '-'){
+        lastValue = +lastValue - +display; 
+        }
+        else if(action == 'x'){
+        lastValue = +lastValue * +display; 
+        }
+        else if(display != '')
+        {
+        lastValue = +lastValue / +display; 
+        }
+        document.getElementById('displayTopLeft').innerHTML = lastValue;
     }
+    
 }
 
 function oopsy(x)
