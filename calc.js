@@ -4,7 +4,7 @@
 let display = '';
 let action = '';
 let lastValue = 0;
-let sideValue = 0;
+let sideValue = '';
 let hitEnter = false;
 
 
@@ -125,17 +125,21 @@ function calculate(){
         lastValue = +lastValue * +display; 
     }
     else{
+        if(display === '0'){
+            oopsy('Divide by 0?');
+        }
+        else{
         lastValue = +lastValue / +display; 
+        }
     }
-    if(lastValue == 'Infinity')
-    {
-        oopsy('Undefined - Can not divide by 0.');
-    }
-    else if(lastValue == 'NaN')
+    
+     if(isNaN(lastValue) || lastValue == 'Infinity')
     {
         oopsy('Not a number.');
     }
+    else{
     document.getElementById('displayTopLeft').innerHTML = lastValue;
+    }
 }
 
 function oopsy(x)
