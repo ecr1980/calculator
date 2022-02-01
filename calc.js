@@ -6,6 +6,7 @@ let action = '';
 let lastValue = 0;
 let sideValue = '';
 let hitEnter = false;
+let hitPeriod = false;
 
 
 
@@ -38,54 +39,44 @@ divideAssign.addEventListener('click', function(){
 
 const plusMinusAssign = document.getElementById('buttonPlusMinus');
 plusMinusAssign.addEventListener('click', function(){
-    if (display.charAt(0) == '-'){
-        display = display.slice(1);
-    }
-    else{
-        display = '-' + display;
-    }
-    document.getElementById('displayBottom').innerHTML = display;
+    plusMinus();
 })
 
 const periodAssign = document.getElementById('buttonPeriod');
 periodAssign.addEventListener('click', function(){
     display = display + '.';
     document.getElementById('displayBottom').innerHTML = display;
+    hitPeriod = true;
 })
 
 const equalsAssign = document.getElementById('buttonEquals');
 equalsAssign.addEventListener('click', function(){
-    if(lastValue != 'Error'){
-    calculate();
-    sideValue = display;
-    display = '';
-    document.getElementById('displayBottom').innerHTML = lastValue;
-    document.getElementById('displayTopRight').innerHTML = '';
-    document.getElementById('displayTopLeft').innerHTML = '';
-    hitEnter = true;
-    }
+    onHitEnter();
 })
 
 const clearAssign = document.getElementById('buttonClear');
 clearAssign.addEventListener('click', function(){
-    display = '';
-    document.getElementById('displayBottom').innerHTML = display;
+    clearCurrent();
 })
 
 const clearEverythingAssign = document.getElementById('buttonClearEverything');
 clearEverythingAssign.addEventListener('click', function(){
     clearEverything();
-    document.getElementById('displayBottom').innerHTML = '';
-    document.getElementById('displayTopRight').innerHTML = '';
-    document.getElementById('displayTopLeft').innerHTML = '';
 });
+
+function clearCurrent(){
+    display = '';
+    document.getElementById('displayBottom').innerHTML = display;
+}
 
 function clearEverything()  
 {
     display = '';
     action = '';
     lastValue = 0;
-    document.getElementById('displayBottom').innerHTML = display;
+    document.getElementById('displayBottom').innerHTML = '';
+    document.getElementById('displayTopRight').innerHTML = '';
+    document.getElementById('displayTopLeft').innerHTML = '';
 }
 
 function valueInput(x){
@@ -93,22 +84,42 @@ function valueInput(x){
         clearEverything();
         hitEnter = false;
     }
-    if(display.length < 9){
+    if((display.length < 9)&& (!(x == 0 && display == '0'))){
     display = display + x;
     document.getElementById('displayBottom').innerHTML = display;
     }
 }
 
 function operationChoice(x){
-    {
-        if (hitEnter == false){
-            calculate();   
-            display = '';
-            }
-            action = x;
-            document.getElementById('displayTopRight').innerHTML = action;
-            hitEnter = false;
+    if (hitEnter == false){
+        calculate();   
+        display = '';
+        }
+        action = x;
+        document.getElementById('displayTopRight').innerHTML = action;
+        hitEnter = false; 
+}
+
+function onHitEnter(){
+    if(lastValue != 'Error'){
+        calculate();
+        sideValue = display;
+        display = '';
+        document.getElementById('displayBottom').innerHTML = lastValue;
+        document.getElementById('displayTopRight').innerHTML = '';
+        document.getElementById('displayTopLeft').innerHTML = '';
+        hitEnter = true;
+        }
+}
+
+function plusMinus(){
+    if (display.charAt(0) == '-'){
+        display = display.slice(1);
     }
+    else{
+        display = '-' + display;
+    }
+    document.getElementById('displayBottom').innerHTML = display;
 }
 
 function calculate(){
@@ -162,4 +173,42 @@ function oopsy(x)
 {
     clearEverything();
     lastValue = x;
+}
+
+document.addEventListener('keyup', function(e){
+    keyboardInput(e.key);
+});
+
+document.addEventListener('keydown', function(e){
+    if(e.key == '/'){
+        e.preventDefault();
+        keyboardInput(e.key);
+    }
+})
+
+function keyboardInput(x){
+    if((x >= 0 && x <= 9 ) || (x == '.'))
+    {
+        valueInput(x);
+    }
+    else if((x == '/') || (x == '*') || (x == '-') || (x == '+'))
+    {
+        operationChoice(x);
+    }
+    else if(x == 'Enter')
+    {
+        onHitEnter();
+    }
+    else if(x == 'Delete')
+    {
+        clearCurrent();
+    }
+    else if(x == 'n')
+    {
+        plusMinus();
+    }
+    else if(x == 'c')
+    {
+        clearEverything();
+    }
 }
