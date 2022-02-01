@@ -82,6 +82,10 @@ button{
     width:400px;
 }
 
+#hint{
+    color:white;
+}
+
 .buttonCollumn{
     display:flex;
     flex-direction: column;
@@ -111,3 +115,4 @@ button{
     background-color:#83ed127e;
     border-radius:20px;
 }
+
