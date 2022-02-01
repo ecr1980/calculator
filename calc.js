@@ -55,6 +55,7 @@ periodAssign.addEventListener('click', function(){
 
 const equalsAssign = document.getElementById('buttonEquals');
 equalsAssign.addEventListener('click', function(){
+    if(lastValue != 'Error'){
     calculate();
     sideValue = display;
     display = '';
@@ -62,6 +63,7 @@ equalsAssign.addEventListener('click', function(){
     document.getElementById('displayTopRight').innerHTML = '';
     document.getElementById('displayTopLeft').innerHTML = '';
     hitEnter = true;
+    }
 })
 
 const clearAssign = document.getElementById('buttonClear');
@@ -91,9 +93,10 @@ function valueInput(x){
         clearEverything();
         hitEnter = false;
     }
+    if(display.length < 9){
     display = display + x;
     document.getElementById('displayBottom').innerHTML = display;
-    
+    }
 }
 
 function operationChoice(x){
@@ -122,23 +125,37 @@ function calculate(){
         }
         if(action == ''){
         lastValue = display;
+        lastValue = roundIt(lastValue);
         }
         else if(action == '+'){
-        lastValue = +lastValue + +display; 
+        lastValue = +lastValue + +display;
+        lastValue = roundIt(lastValue); 
         }
         else if(action == '-'){
-        lastValue = +lastValue - +display; 
+        lastValue = +lastValue - +display;
+        lastValue = roundIt(lastValue); 
         }
         else if(action == 'x'){
         lastValue = +lastValue * +display; 
+        lastValue = roundIt(lastValue);
         }
         else if(display != '')
         {
-        lastValue = +lastValue / +display; 
+        lastValue = +lastValue / +display;
+        lastValue = roundIt(lastValue); 
+        }
+        let lengthCheck = lastValue.toString(10);
+        if(lengthCheck.length > 10){
+            clearEverything();
+            lastValue = 'Error';
         }
         document.getElementById('displayTopLeft').innerHTML = lastValue;
     }
     
+}
+
+function roundIt(x){
+    return(Math.round(x*100)/100);
 }
 
 function oopsy(x)
