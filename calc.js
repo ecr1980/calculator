@@ -146,11 +146,11 @@ function calculate(){
         lastValue = +lastValue - +display;
         lastValue = roundIt(lastValue); 
         }
-        else if(action == 'x'){
+        else if((action == 'x')&&(display != '')){
         lastValue = +lastValue * +display; 
         lastValue = roundIt(lastValue);
         }
-        else if(display != '')
+        else if((display != '')&& (lastValue !== 0))
         {
         lastValue = +lastValue / +display;
         lastValue = roundIt(lastValue); 
