@@ -3,7 +3,7 @@
 
 let display = '';
 let action = '';
-let lastValue = 0;
+let lastValue = '';
 let sideValue = '';
 let hitEnter = false;
 let hitPeriod = false;
@@ -73,7 +73,7 @@ function clearEverything()
 {
     display = '';
     action = '';
-    lastValue = 0;
+    lastValue = '';
     document.getElementById('displayBottom').innerHTML = '';
     document.getElementById('displayTopRight').innerHTML = '';
     document.getElementById('displayTopLeft').innerHTML = '';
@@ -123,7 +123,7 @@ function plusMinus(){
 }
 
 function calculate(){
-    if(display === '0'){
+    if((display === '0')&&(action == '/')){
         oopsy('Divide by 0?');
     }
     else if(isNaN(lastValue) || isNaN(display) || document.getElementById('displayTopLeft').innerHTML == 'Infinity')
@@ -191,7 +191,7 @@ function keyboardInput(x){
     {
         valueInput(x);
     }
-    else if((x == '/') || (x == '*') || (x == '-') || (x == '+'))
+    else if((x == '/') || (x == 'x') || (x == '-') || (x == '+'))
     {
         operationChoice(x);
     }
